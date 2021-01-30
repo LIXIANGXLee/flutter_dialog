@@ -4,11 +4,56 @@ A new Flutter package.
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+```
+ManagerUtils.showBottomDialog(
+      context,
+      SheetBottomDialog(titleText: Text('确认要退出登录吗？'),cancelItem: AlertItem(
+          text: Text('取消'),
+          callBack: () {
+            print('取消');
+          }), items: [
+        AlertItem(
+            text: Text('相机'),
+            callBack: () {
+              print('相机');
+            }),
+        AlertItem(
+            text: Text('相册'),
+            callBack: () {
+              print('相册');
+            }),
+      ]));
+      
+```
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+```
+ManagerUtils.showBottomDialog(
+    context,
+    SheetPickerDialog(
+      items: ['北京', '上海', '天津', '深圳', '武汉', '广州', '杭州'],
+      callBack: (index, text) {
+
+        print('========${index}==${text}');
+
+      },
+    ));
+      
+```
+```
+ManagerUtils.showCenterDialog(
+       context,
+       AlertCenterDialog(
+         titleText: Text('提示'),
+         contentText: Text('说的话v十点半v城市阿迪面包车进行明显比女性从v',textAlign: TextAlign.center,),
+         alertItems: [
+           AlertItem(text: Text('取消'), callBack: () {
+             print('取消');
+           }),
+           AlertItem(text: Text('确定'), callBack: () {
+             print('确定');
+
+           }),
+         ],
+       ));
+      
+```
