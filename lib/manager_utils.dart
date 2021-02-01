@@ -15,6 +15,7 @@ class ManagerUtils {
   ///显示底部弹窗
   static void showBottomDialog(BuildContext context, Widget widget) {
     showModalBottomSheet(
+      backgroundColor: Colors.transparent,
       context: context,
       isScrollControlled: true,
       builder: (ctx) {

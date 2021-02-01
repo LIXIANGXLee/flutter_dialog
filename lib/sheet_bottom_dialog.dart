@@ -9,10 +9,10 @@ class SheetBottomDialog extends StatefulWidget {
   final double itemHeight;
   final AlertItem cancelItem;
   final Color bgColor;
-  final Color itemColor;
   final double cancelTop;
   final Color cancelItemColor;
   final Color lineColor;
+  final double radius;
 
   SheetBottomDialog({
     @required this.items,
@@ -20,11 +20,11 @@ class SheetBottomDialog extends StatefulWidget {
     this.titleText,
     this.titleHeight = 50,
     this.itemHeight = 50,
-    this.bgColor = const Color(0xFFE8E8E8),
+    this.bgColor = Colors.white,
     this.lineColor = const Color(0xFFE8E8E8),
-    this.itemColor = Colors.white,
     this.cancelTop = 8,
     this.cancelItemColor = Colors.white,
+    this.radius = 0.0,
   });
 
   @override
@@ -35,28 +35,34 @@ class _SheetBottomDialogState extends State<SheetBottomDialog> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: widget.bgColor,
+      decoration: BoxDecoration(
+        color: widget.bgColor,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(widget.radius),
+          topRight: Radius.circular(widget.radius),
+        ),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           (widget.titleText != null)
               ? Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width,
-                  height: widget.titleHeight,
-                  child: widget.titleText,
-                  decoration: BoxDecoration(
-                    color: widget.itemColor,
-                    border: Border(
-                      bottom: BorderSide(
-                        color: widget.lineColor,
-                      ),
-                    ),
-                  ))
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width,
+              height: widget.titleHeight,
+              child: widget.titleText,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                border: Border(
+                  bottom: BorderSide(
+                    color: widget.lineColor,
+                  ),
+                ),
+              ))
               : Container(),
           Container(
-            color: widget.itemColor,
+            color: Colors.transparent,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: widget.items.map((item) {
@@ -76,7 +82,7 @@ class _SheetBottomDialogState extends State<SheetBottomDialog> {
                     decoration: BoxDecoration(
                       border: Border(
                           bottom:
-                              BorderSide(color: widget.lineColor, width: 1)),
+                          BorderSide(color: widget.lineColor, width: 1)),
                     ),
                   ),
                 );
@@ -86,25 +92,25 @@ class _SheetBottomDialogState extends State<SheetBottomDialog> {
           widget.cancelItem == null
               ? Container()
               : GestureDetector(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: widget.cancelTop),
-                    child: Container(
-                      color: widget.itemColor,
-                      height: widget.itemHeight,
-                      width: MediaQuery.of(context).size.width,
-                      child: Center(
-                        child: widget.cancelItem.text,
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    if (widget.cancelItem.callBack != null) {
-                      widget.cancelItem.callBack();
-                    }
-                  },
+            child: Padding(
+              padding: EdgeInsets.only(top: widget.cancelTop),
+              child: Container(
+                color: Colors.transparent,
+                height: widget.itemHeight,
+                width: MediaQuery.of(context).size.width,
+                child: Center(
+                  child: widget.cancelItem.text,
                 ),
+              ),
+            ),
+            onTap: () {
+              if (widget.cancelItem.callBack != null) {
+                widget.cancelItem.callBack();
+              }
+            },
+          ),
           Container(
-            color: widget.itemColor,
+            color: Colors.transparent,
             height: MediaQuery.of(context).padding.bottom,
           )
         ],

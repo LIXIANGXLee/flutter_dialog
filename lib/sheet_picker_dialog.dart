@@ -16,6 +16,7 @@ class SheetPickerDialog extends StatefulWidget {
   final double height;
   final double itemHeight;
   final Color lineColor;
+  final double radius;
 
   SheetPickerDialog({
     @required this.items,
@@ -23,6 +24,8 @@ class SheetPickerDialog extends StatefulWidget {
     this.titleText,
     this.height = 300,
     this.itemHeight = 44,
+    this.radius = 0.0,
+
     this.cancelText = const Text(
       '取消',
       style: TextStyle(color: Color(0xFF999999), fontSize: 15),
@@ -42,50 +45,61 @@ class _SheetPickerDialogState extends State<SheetPickerDialog> {
   @override
   Widget build(BuildContext context) {
     var selectIndex;
-    return Container(
-      height: widget.height,
-      color: Colors.white,
-      child: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              FlatButton(
-                child: widget.cancelText,
-                onPressed: () {
-                  ManagerUtils.pop(context);
-                },
-              ),
-              FlatButton(
-                child: widget.sureText,
-                highlightColor: Colors.white,
-                onPressed: () {
-                  Navigator.pop(context);
-                  if (selectIndex == null && widget.items.length > 0) {
-                    selectIndex = 0;
-                  }
-                  if (widget.callBack != null) {
-                    widget.callBack(selectIndex, widget.items[selectIndex]);
-                  }
-                },
-              ),
-            ],
-          ),
-          Divider(
-            height: 1,
-            color: widget.lineColor,
-          ),
-          Expanded(
-            child: CupertinoPicker(
-              children:
-                  widget.items.map((e) => Center(child: Text(e))).toList(),
-              onSelectedItemChanged: (index) {
-                selectIndex = index;
-              },
-              itemExtent: widget.itemHeight,
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(widget.radius),
+        topRight: Radius.circular(widget.radius),
+      ),
+      child: Container(
+        height: widget.height,
+        color: Colors.white,
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                FlatButton(
+                  child: widget.cancelText,
+                  onPressed: () {
+                    ManagerUtils.pop(context);
+                  },
+                ),
+                FlatButton(
+                  child: widget.sureText,
+                  highlightColor: Colors.white,
+                  onPressed: () {
+                    Navigator.pop(context);
+                    if (selectIndex == null && widget.items.length > 0) {
+                      selectIndex = 0;
+                    }
+                    if (widget.callBack != null) {
+                      widget.callBack(selectIndex, widget.items[selectIndex]);
+                    }
+                  },
+                ),
+              ],
             ),
-          ),
-        ],
+            Divider(
+              height: 1,
+              color: widget.lineColor,
+            ),
+            Expanded(
+              child: CupertinoPicker(
+                  backgroundColor: Colors.white,
+                children:
+                widget.items.map((e) => Center(child: Text(e))).toList(),
+                onSelectedItemChanged: (index) {
+                  selectIndex = index;
+                },
+                itemExtent: widget.itemHeight,
+              ),
+            ),
+            Container(
+              color: Colors.white,
+              height: MediaQuery.of(context).padding.bottom,
+            )
+          ],
+        ),
       ),
     );
   }
