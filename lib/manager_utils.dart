@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 /// 弹窗工具类
 class ManagerUtils {
-
   /// 显示中间弹窗
   static void showCenterDialog(BuildContext context, Widget widget) {
-    showDialog(context: context,
+    showDialog(
+        context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
           return widget;
@@ -37,5 +37,4 @@ class ManagerUtils {
       ),
     );
   }
-
 }

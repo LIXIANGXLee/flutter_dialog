@@ -10,8 +10,8 @@ class SheetBottomDialog extends StatefulWidget {
   final AlertItem cancelItem;
   final Color bgColor;
   final Color itemColor;
+  final double cancelTop;
   final Color cancelItemColor;
-
   final Color lineColor;
 
   SheetBottomDialog({
@@ -23,6 +23,7 @@ class SheetBottomDialog extends StatefulWidget {
     this.bgColor = const Color(0xFFE8E8E8),
     this.lineColor = const Color(0xFFE8E8E8),
     this.itemColor = Colors.white,
+    this.cancelTop = 8,
     this.cancelItemColor = Colors.white,
   });
 
@@ -86,7 +87,7 @@ class _SheetBottomDialogState extends State<SheetBottomDialog> {
               ? Container()
               : GestureDetector(
                   child: Padding(
-                    padding: EdgeInsets.only(top: 10),
+                    padding: EdgeInsets.only(top: widget.cancelTop),
                     child: Container(
                       color: widget.itemColor,
                       height: widget.itemHeight,

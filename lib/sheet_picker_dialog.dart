@@ -15,7 +15,6 @@ class SheetPickerDialog extends StatefulWidget {
   final SheetPickerCallBack callBack;
   final double height;
   final double itemHeight;
-
   final Color lineColor;
 
   SheetPickerDialog({
@@ -78,7 +77,8 @@ class _SheetPickerDialogState extends State<SheetPickerDialog> {
           ),
           Expanded(
             child: CupertinoPicker(
-              children: widget.items.map((e) => Center(child: Text(e))).toList(),
+              children:
+                  widget.items.map((e) => Center(child: Text(e))).toList(),
               onSelectedItemChanged: (index) {
                 selectIndex = index;
               },

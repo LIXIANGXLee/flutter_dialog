@@ -90,7 +90,9 @@ class _AlertCenterDialogState extends State<AlertCenterDialog> {
                             decoration: BoxDecoration(
                               border: Border(
                                 right: BorderSide(
-                                  color:index == widget.alertItems.length - 1 ? Colors.transparent : widget.alertItemLineColor,
+                                  color: index == widget.alertItems.length - 1
+                                      ? Colors.transparent
+                                      : widget.alertItemLineColor,
                                   width: 1,
                                 ),
                               ),
