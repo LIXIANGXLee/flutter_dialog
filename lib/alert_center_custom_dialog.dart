@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'alert_item.dart';
 
-/// 中间弹出层UI界面
-class AlertCenterDialog extends StatefulWidget {
-  final double titleTop;
-  final Text titleText;
-  final double contentTop;
-  final Text contentText;
-  final EdgeInsets contentEdgeInsets;
+/// 中间弹出层UI界面 可以自定义
+class AlertCenterCustomDialog extends StatefulWidget {
+  final Widget child;
   final double alertItemTop;
   final List<AlertItem> alertItems;
   final double alertItemHeight;
@@ -17,12 +12,8 @@ class AlertCenterDialog extends StatefulWidget {
   final double width;
   final double radius;
 
-  AlertCenterDialog(
-      {this.titleTop = 30,
-      this.titleText,
-      this.contentTop = 20,
-      @required this.contentText,
-      this.contentEdgeInsets = const EdgeInsets.only(left: 15, right: 15),
+  AlertCenterCustomDialog(
+      {@required this.child,
       this.alertItemTop = 20,
       @required this.alertItems,
       this.alertItemHeight = 44,
@@ -32,10 +23,11 @@ class AlertCenterDialog extends StatefulWidget {
       this.width = 260});
 
   @override
-  _AlertCenterDialogState createState() => _AlertCenterDialogState();
+  _AlertCenterCustomDialogState createState() =>
+      _AlertCenterCustomDialogState();
 }
 
-class _AlertCenterDialogState extends State<AlertCenterDialog> {
+class _AlertCenterCustomDialogState extends State<AlertCenterCustomDialog> {
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -49,28 +41,7 @@ class _AlertCenterDialogState extends State<AlertCenterDialog> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                SizedBox(height: widget.titleTop),
-                (widget.titleText == null)
-                    ? Container()
-                    : Container(
-                        child: widget.titleText,
-                      ),
-                SizedBox(height: widget.contentTop),
-                Container(
-                  margin: widget.contentEdgeInsets,
-                  child: widget.contentText,
-                ),
-                SizedBox(height: widget.alertItemTop),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: widget.alertItemLineColor,
-                        width: 1,
-                      ),
-                    ),
-                  ),
-                ),
+                widget.child,
                 Container(
                   child: Row(
                     children: widget.alertItems.map((res) {
