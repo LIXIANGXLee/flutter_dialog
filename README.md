@@ -81,4 +81,17 @@ A new Flutter package.
     ));
 
 ```
-
+```
+ ManagerUtils.showBottomDialog(
+      context,
+      SheetDatePickerDialog(
+        titleText: Text(
+          '日期选择',
+          style: TextStyle(color: Colors.red),
+        ),
+        radius: 10,
+        callBack: (ee) {
+          print('====${ee}');
+        },
+      ));
+```

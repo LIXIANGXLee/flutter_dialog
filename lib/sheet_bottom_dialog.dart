@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dialog/flutter_dialog.dart';
 
 import 'alert_item.dart';
 
@@ -69,6 +70,7 @@ class _SheetBottomDialogState extends State<SheetBottomDialog> {
                 int index = widget.items.indexOf(item);
                 return GestureDetector(
                   onTap: () {
+                    ManagerUtils.pop(context);
                     if (item.callBack != null) {
                       item.callBack();
                     }
@@ -92,18 +94,21 @@ class _SheetBottomDialogState extends State<SheetBottomDialog> {
           widget.cancelItem == null
               ? Container()
               : GestureDetector(
-            child: Padding(
-              padding: EdgeInsets.only(top: widget.cancelTop),
-              child: Container(
+            child:Container(
+              decoration: BoxDecoration(
                 color: Colors.transparent,
-                height: widget.itemHeight,
-                width: MediaQuery.of(context).size.width,
-                child: Center(
-                  child: widget.cancelItem.text,
-                ),
+                border: Border(
+                    top:
+                    BorderSide(color: widget.lineColor, width: widget.cancelTop)),
+              ),
+              height: widget.itemHeight,
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                child: widget.cancelItem.text,
               ),
             ),
             onTap: () {
+              ManagerUtils.pop(context);
               if (widget.cancelItem.callBack != null) {
                 widget.cancelItem.callBack();
               }
